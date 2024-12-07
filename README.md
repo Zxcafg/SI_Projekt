@@ -7,7 +7,9 @@ Model ten będzie wykorzystywał technologię Long Short-Term Memory (LSTM), kt�
 Model będzie analizował dane wejściowe przedstawiające zmieniające się wartości w czasie (np. zmiany ceny akcji, temperatury, itp.) i na ich podstawie przewidywał wartość na przyszłość.
 
 Przykład: mamy dane o cenie akcji spółki z ostatnich dni, w odpowiedzi chcemy przewidzieć jutrzejszą cenę.
-![Zrzut ekranu 2024-12-07 191340](https://github.com/user-attachments/assets/4ea31326-595b-4b9b-a383-4d65b0b43b53)
+
+![Zrzut ekranu 2024-12-07 191340](https://github.com/user-attachments/assets/554e7fe9-b65a-45c8-bba3-da9c1f26b315)
+
 
 ## _Motywacja:_
 
@@ -230,11 +232,11 @@ Dla czterech dni wejściowych, LSTM analizuje każdy dzień jako część sekwen
 
 Przykładowe obliczenia dla jednego dnia:
 
-<img width="957" alt="Zrzut ekranu 2024-12-07 225925" src="https://github.com/user-attachments/assets/6879f8fc-2f7c-4ff9-9287-e405d54814bf">
+<img width="957" alt="image" src="https://github.com/user-attachments/assets/6879f8fc-2f7c-4ff9-9287-e405d54814bf">
 
 Takie obliczenia zgodnie z algorytmem zostaną zrobione dla każdego dnia:
 
-<img width="934" alt="Zrzut ekranu 2024-12-07 231134" src="https://github.com/user-attachments/assets/6f26adb9-48be-41d7-a546-ec9667289ca9">
+<img width="934" alt="image" src="https://github.com/user-attachments/assets/6f26adb9-48be-41d7-a546-ec9667289ca9">
 
 Pod koniec obliczeń otrzymujemy konieczną wartośc z "Short Term Memory"(na zdjęciu oznaczona jako "x"), która i będzie przewidywaną wartością na 5 dzień.
 
