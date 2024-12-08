@@ -4,11 +4,11 @@
 
 Celem projektu jest opracowanie modelu sztucznej inteligencji (SI), który będzie przewidywał przyszłe wartości na podstawie analizy trendów w danych. 
 Model ten będzie wykorzystywał technologię Long Short-Term Memory (LSTM), która jest jednym z typów rekurencyjnych sieci neuronowych (RNN). 
-Model będzie analizował dane wejściowe przedstawiające zmieniające się wartości w czasie (np. zmiany ceny akcji, temperatury, itp.) i na ich podstawie przewidywał wartość na przyszłość.
+Model będzie analizował dane wejściowe przedstawiające zmieniające się wartości w czasie (np. zmiany ceny mieszkań, temperatury, itp.) i na ich podstawie przewidywał wartość na przyszłość.
 
-Przykład: mamy dane o cenie akcji spółki z ostatnich dni, w odpowiedzi chcemy przewidzieć jutrzejszą cenę.
+Przykład: mamy dane o cenie mieszkań z ostatnich kwartałów, w odpowiedzi chcemy przewidzieć cenę na następny kwatał.
 
-![Zrzut ekranu 2024-12-07 191340](https://github.com/user-attachments/assets/554e7fe9-b65a-45c8-bba3-da9c1f26b315)
+![image](https://github.com/user-attachments/assets/002d1bbd-0141-441d-9a93-301ca9b197b1)
 
 
 ## _Motywacja:_
@@ -20,11 +20,12 @@ ponieważ LSTM jest bardziej odporny na błędy niż klasyczne rekurencyjne siec
 
 ## _Dane wejściowe:_
 
-Dane wejściowe do modelu będą pochodzić z serii wartości zmieniających się w czasie(dniach), które będą generowane losowo (dla uproszczenia w przedziale "high" , "Medium" i "Low").
-Dane te będą reprezentować zmieniający się trend w czasie (np. zmiany cen, temperatury, wskaźników ekonomicznych).
-Model będzie otrzymywał dane na przestrzeni "x" dni, a potem model wygeneruje prognozę wartości na podstawie tych danych.
+Dane wejściowe do modelu będą pochodzić z serii średnich cen transakcyjnych na mieszkania (z rynku pierwotnego, z ostanich 15 lat) wartości zmieniających się w czasie(kwartał), które będą wprowadzane do algorytmu (dla uproszczenia w przedziale "high" , "Medium" i "Low").
+Dane te będą reprezentować zmieniający się trend w czasie (np. zmiany cen, temperatury).
+Model będzie otrzymywał dane na przestrzeni "x" czasu, a potem model wygeneruje prognozę wartości na podstawie tych danych.
 
-<img width="637" alt="image" src="https://github.com/user-attachments/assets/b958f90e-3c27-416e-a53f-04987830de88">
+![image](https://github.com/user-attachments/assets/4cc6afc0-4922-4f0b-8066-b88bce4703a0)
+
 
 ## _Zastosowanie sztucznej inteligencji:_
 
@@ -219,26 +220,27 @@ To pozwala wyprowadzać tylko te informacje, które są potrzebne w danym kroku.
 
 ## Zastosowanie LSTM w projekcie
 
-W projekcie sieć LSTM analizuje wygenerowane dane i przewiduje trend na następny dzień. Dzięki opisanym mechanizmom (zapominanie, aktualizacja, generowanie wyjścia) model potrafi uwzględniać istotne zależności czasowe i ignorować zbędne dane.LSTM "przechodzi" przez dane sekwencyjne, na każdym kroku dokonując aktualizacji stanu komórki i wyjścia. W przeciwieństwie do klasycznych RNN, LSTM pozwala na przechowywanie informacji na dłuższe okresy, dzięki bramkom, które kontrolują przepływ informacji. Z tego powodu LSTM może lepiej radzić sobie z długoterminowymi zależnościami, np. w analizie trendów czasowych.
+W projekcie sieć LSTM analizuje przesłane dane i przewiduje trend na następny czas(kwartał). Dzięki opisanym mechanizmom (zapominanie, aktualizacja, generowanie wyjścia) model potrafi uwzględniać istotne zależności czasowe i ignorować zbędne dane.LSTM "przechodzi" przez dane sekwencyjne, na każdym kroku dokonując aktualizacji stanu komórki i wyjścia. W przeciwieństwie do klasycznych RNN, LSTM pozwala na przechowywanie informacji na dłuższe okresy, dzięki bramkom, które kontrolują przepływ informacji. Z tego powodu LSTM może lepiej radzić sobie z długoterminowymi zależnościami, np. w analizie trendów czasowych.
 
 ---
 
-### Przykład działania LSTM w kontekście prognozowania wartości na podstawie 4 dni
+### Przykład działania LSTM w kontekście prognozowania wartości na podstawie 4 kwartałów
 
-Dla czterech dni wejściowych, LSTM analizuje każdy dzień jako część sekwencji. Wartości z wcześniejszych dni wpływają na decyzje podejmowane przez bramki, co pozwala na przewidywanie wartości na dzień 5. 
+Dla czterech kwartałów wejściowych, LSTM analizuje każdy kwartał jako część sekwencji. Wartości z wcześniejszych kwartałów wpływają na decyzje podejmowane przez bramki, co pozwala na przewidywanie wartości na następny kwartał. 
 
 - Stan komórki przechowuje informacje o zależnościach występujących w danych (np. zmiany wartości w trendzie). 
 - Te informacje są następnie wykorzystywane do prognozowania kolejnej wartości.
 
-Przykładowe obliczenia dla jednego dnia:
+Przykładowe obliczenia dla jednego kwartału:
 
 <img width="957" alt="image" src="https://github.com/user-attachments/assets/6879f8fc-2f7c-4ff9-9287-e405d54814bf">
 
-Takie obliczenia zgodnie z algorytmem zostaną zrobione dla każdego dnia:
+Takie obliczenia zgodnie z algorytmem zostaną zrobione dla każdego kwartału:
 
-<img width="934" alt="image" src="https://github.com/user-attachments/assets/6f26adb9-48be-41d7-a546-ec9667289ca9">
+<img width="934" alt="image" src="https://github.com/user-attachments/assets/82979938-5f75-4198-a963-9c425df1aa8b">
 
-Pod koniec obliczeń otrzymujemy konieczną wartośc z "Short Term Memory"(na zdjęciu oznaczona jako "x"), która i będzie przewidywaną wartością na 5 dzień.
+
+Pod koniec obliczeń otrzymujemy konieczną wartośc z "Short Term Memory"(na zdjęciu oznaczona jako "x"), która i będzie przewidywaną wartością na następny kwartał.
 
 ---
 
@@ -258,7 +260,7 @@ Pod koniec obliczeń otrzymujemy konieczną wartośc z "Short Term Memory"(na zd
 
 3. **Źródło danych**  
    - W rzeczywistym świecie dane mogą pochodzić z baz danych, plików CSV lub interfejsów API, takich jak dane giełdowe, dane pogodowe, logi systemów IT itp.  
-   - W naszym przypadku dane są generowane automatycznie w zakresie od 0 do 1.  
+   - W naszym przypadku dane są brane ze zródeł które posiadają dane zmian cen na mieszkania w zakresie ostatnich 15 lat(z różnych miast Polski).  
 
 4. **Dane historyczne do trenowania**  
    W prawdziwych zastosowaniach wymagane są duże zbiory danych historycznych, aby nauczyć model rozpoznawać wzorce.
@@ -268,15 +270,15 @@ Pod koniec obliczeń otrzymujemy konieczną wartośc z "Short Term Memory"(na zd
 ### Procedura testowania rozwiązania
 
 1. **Testy funkcjonalne**  
-   - Sprawdzenie poprawności generowania danych wejściowych: czy dane są w odpowiednim formacie (np. zakres od 0 do 1).  
-   - Upewnienie się, że model LSTM poprawnie przewiduje wartość na podstawie wcześniejszych dni.  
+   - Sprawdzenie poprawności generowania danych wejściowych: czy dane są w odpowiednim formacie.  
+   - Upewnienie się, że model LSTM poprawnie przewiduje wartość na podstawie wcześniejszych dannych.  
 
 2. **Testy wydajnościowe**  
    - Testowanie szybkości trenowania modelu na większych zbiorach danych.  
    - Monitorowanie zużycia zasobów, takich jak pamięć RAM i moc obliczeniowa procesora/GPU.
 
 3. **Testy dokładności**  
-   - Porównanie prognozowanych wartości z rzeczywistymi (wygenerowanymi wcześniej) w celu oceny dokładności przewidywań.  
+   - Porównanie prognozowanych wartości z rzeczywistymi w celu oceny dokładności przewidywań.  
    - Obliczenie błędów takich jak MSE (Mean Squared Error) lub MAE (Mean Absolute Error).  
 
 4. **Testy użytkowe**  
